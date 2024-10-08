@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mit-scratch-app",
-    "slug": "mit-scratch-app",
+    "slug": "mitscratchclone",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +18,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.theghost_2003.mitscratchclone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7372a0ee-7208-4f1d-9432-192745511c3d"
+      }
+    },
+    "owner": "theghost_2003"
   }
 }
