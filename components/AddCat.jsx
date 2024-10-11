@@ -5,7 +5,6 @@ const AddCat = ({ deleteCat, index, onCatPress }) => {
   return (
     <View
       style={{
-        marginTop: "2%",
         width: 90,
         justifyContent: "center",
         alignItems: "center",

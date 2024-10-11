@@ -27,9 +27,9 @@ export const addCommand = (command) => ({
   payload: command,
 });
 
-export const executeCommands = (commands, selectedCatIndex) => ({
+export const executeCommands = (commands, selectedCatIndex, checked) => ({
   type: EXECUTE_COMMANDS,
-  payload: { commands, selectedCatIndex },
+  payload: { commands, selectedCatIndex, checked },
 });
 
 export const deleteCommand = (id) => ({

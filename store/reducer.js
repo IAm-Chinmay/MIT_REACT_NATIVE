@@ -45,10 +45,10 @@ const catReducer = (state = initialState, action) => {
       };
 
     case EXECUTE_COMMANDS:
-      const commandsToExecute = action.payload;
+      const { commands, selectedCatIndex, checked } = action.payload;
       let newState = { ...state };
 
-      commandsToExecute.forEach((command) => {
+      commands.forEach((command) => {
         const [actionType, distanceStr] = command.command.split(" ");
         const distance = parseInt(distanceStr, 10);
 
@@ -79,7 +79,7 @@ const catReducer = (state = initialState, action) => {
 
       return {
         ...newState,
-        commands: [],
+        commands: checked ? state.commands : [],
       };
 
     case DELETE_COMMAND:

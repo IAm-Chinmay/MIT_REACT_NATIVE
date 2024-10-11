@@ -1,11 +1,9 @@
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import React from "react";
 import Playground from "./components/Playground";
 import AddSpirt from "./components/AddSpirt";
 import { useDispatch, useSelector } from "react-redux";
 import { addCat, deleteCat } from "./store/actions";
-import Sprit from "./components/Sprit";
-
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const cats = useSelector((state) => state.cats);
@@ -25,11 +23,14 @@ const HomeScreen = () => {
   };
 
   return (
-    <View>
+    <ScrollView
+      contentContainerStyle={{
+        flex: 1,
+      }}
+    >
       <Playground cats={cats} />
-      <Sprit />
       <AddSpirt addNewCat={addNewCat} deleteCat={handleDeleteCat} />
-    </View>
+    </ScrollView>
   );
 };
 

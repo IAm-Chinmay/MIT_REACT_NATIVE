@@ -3,7 +3,12 @@ import { View, Image, PanResponder, Pressable } from "react-native";
 
 const DraggableBox = ({ position, updateCatPosition, index, isSelected }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const lastPositionRef = useRef({ x: position.x, y: position.y });
+  const initialX = Number(position?.x) || 0;
+  const initialY = Number(position?.y) || 0;
+  const lastPositionRef = useRef({
+    x: initialX,
+    y: initialY,
+  });
 
   const panResponder = useRef(
     PanResponder.create({
@@ -13,15 +18,17 @@ const DraggableBox = ({ position, updateCatPosition, index, isSelected }) => {
       onPanResponderGrant: () => {
         setIsDragging(true);
         lastPositionRef.current = {
-          x: position.x,
-          y: position.y,
+          x: Number(position.x) || 0,
+          y: Number(position.y) || 0,
         };
       },
 
       onPanResponderMove: (_, gestureState) => {
-        const newX = lastPositionRef.current.x + gestureState.dx;
-        const newY = lastPositionRef.current.y + gestureState.dy;
-        updateCatPosition(index, newX, newY);
+        const newX = lastPositionRef.current.x + gestureState.dx || 0;
+        const newY = lastPositionRef.current.y + gestureState.dy || 0;
+        if (!isNaN(newX) && !isNaN(newY)) {
+          updateCatPosition(index, newX, newY);
+        }
       },
 
       onPanResponderRelease: () => {
@@ -37,14 +44,17 @@ const DraggableBox = ({ position, updateCatPosition, index, isSelected }) => {
     })
   ).current;
 
+  const styleLeft = Number(position?.x) || 0;
+  const styleTop = Number(position?.y) || 0;
+
   return (
     <Pressable>
       <View
         {...panResponder.panHandlers}
         style={{
           position: "absolute",
-          left: position.x,
-          top: position.y,
+          left: styleLeft,
+          top: styleTop,
           width: 90,
           height: 90,
         }}

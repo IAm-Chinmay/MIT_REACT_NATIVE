@@ -5,7 +5,7 @@ const ANIMATION_DURATION = 500;
 const commandMiddleware = (store) => (next) => (action) => {
   if (action.type === EXECUTE_COMMANDS) {
     const state = store.getState();
-    const { commands, selectedCatIndex } = action.payload;
+    const { commands, selectedCatIndex, checked } = action.payload;
 
     if (
       selectedCatIndex.some((index) => index < 0 || index >= state.cats.length)
@@ -18,10 +18,14 @@ const commandMiddleware = (store) => (next) => (action) => {
       executeCommandsSequentially(commands, index, store);
     });
 
-    return next({
-      type: "SET_COMMANDS",
-      payload: [],
-    });
+    if (!checked) {
+      return next({
+        type: "SET_COMMANDS",
+        payload: [],
+      });
+    }
+
+    return next(action);
   }
 
   return next(action);
